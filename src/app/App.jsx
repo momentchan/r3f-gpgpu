@@ -5,6 +5,7 @@ import Utilities from "../r3f-gist/utility/Utilities";
 import { CustomShaderMaterial } from "../r3f-gist/shader/CustomShaderMaterial";
 import fragmentShader from "../shader/test/fragment.glsl";
 import { useControls } from 'leva'
+import Trail from "./Trail.jsx";
 
 function BasicMesh() {
     const materialRef = useRef()
@@ -46,8 +47,8 @@ export default function App() {
             gl={{ preserveDrawingBuffer: true }}
         >
             <CameraControls makeDefault />
-            <BasicMesh />
             <Utilities />
+            <Trail />
         </Canvas>
     </>
 }
