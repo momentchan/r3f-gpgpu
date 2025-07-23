@@ -1,3 +1,5 @@
+uniform float dt;   
+
 void main() {
 
     if(gl_FragCoord.x <= 1.0) {
@@ -5,7 +7,7 @@ void main() {
         vec3 pos = texture2D(positionTex, uv).xyz;
         vec3 vel = texture2D(velocityTex, uv).xyz;
 
-        pos += vel * 0.01;
+        pos += vel * dt;
         gl_FragColor = vec4(pos, 1.0);
 
     } else {

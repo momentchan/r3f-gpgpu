@@ -29,6 +29,9 @@ export default function Trail() {
 
     const posCompute = new THREE.ShaderMaterial({
         fragmentShader: posComputeShader,
+        uniforms: {
+            dt: { value: 0.01 },
+        }
     })
     const velCompute = new THREE.ShaderMaterial({
         fragmentShader: velComputeShader,
@@ -107,9 +110,10 @@ export default function Trail() {
         return mesh
     }, [num, length, mat])
 
-    useFrame((state) => {
+    useFrame((state, delta) => {
         gpgpu.setUniform('velocityTex', 'time', state.clock.elapsedTime)
 
+        gpgpu.setUniform('positionTex', 'dt', delta)
         gpgpu.compute()
 
         mat.uniforms.uPositionTex.value = gpgpu.getCurrentRenderTarget("positionTex")
